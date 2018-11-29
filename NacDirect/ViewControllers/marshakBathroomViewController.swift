@@ -1,15 +1,16 @@
 //
-//  bathroomViewController.swift
+//  marshakBathroomViewController.swift
+//  NacDirect
 //
-//
-//  Created by Bhavesh Shah on 11/20/18.
+//  Created by Bhavesh Shah on 11/24/18.
+//  Copyright © 2018 Bhavesh Shah. All rights reserved.
 //
 
 import UIKit
 import Parse
 
-class bathroomViewController: UIViewController {
-    
+class marshakBathroomViewController: UIViewController {
+
     var firsttotal = 0
     var secondtotal = 0
     var thirdtotal = 0
@@ -22,6 +23,7 @@ class bathroomViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(floorNumber)
         fetchPostData()
     }
     
@@ -36,16 +38,16 @@ class bathroomViewController: UIViewController {
         query.findObjectsInBackground { (posts, error) in
             if error == nil {
                 for post in posts! {
-                    if post["building"] as? String == "nac" && post["floor_number"] as? String == self.floorNumber! && post["side"] as? String == "East" && post["gender"] as? String == "Male" {
+                    if post["building"] as? String == "marshak" && post["floor_number"] as? String == self.floorNumber! && post["side"] as? String == "East" && post["gender"] as? String == "Male" {
                         self.firsttotal += 1 //need to work on this part
                     }
-                    else if post["building"] as? String == "nac" && post["floor_number"] as? String == self.floorNumber! && post["side"] as? String == "East" && post["gender"] as? String == "Female" {
+                    else if post["building"] as? String == "marshak" && post["floor_number"] as? String == self.floorNumber! && post["side"] as? String == "East" && post["gender"] as? String == "Female" {
                         self.secondtotal += 1 //need to work on this part
                     }
-                    else if post["building"] as? String == "nac" && post["floor_number"] as? String == self.floorNumber! && post["side"] as? String == "West" && post["gender"] as? String == "Male" {
+                    else if post["building"] as? String == "marshak" && post["floor_number"] as? String == self.floorNumber! && post["side"] as? String == "West" && post["gender"] as? String == "Male" {
                         self.thirdtotal += 1 //need to work on this part
                     }
-                    else if post["building"] as? String == "nac" && post["floor_number"] as? String == self.floorNumber! && post["side"] as? String == "West" && post["gender"] as? String == "Female" {
+                    else if post["building"] as? String == "marshak" && post["floor_number"] as? String == self.floorNumber! && post["side"] as? String == "West" && post["gender"] as? String == "Female" {
                         self.fourthtotal += 1 //need to work on this part
                     }
                 }
@@ -74,7 +76,5 @@ class bathroomViewController: UIViewController {
         
         
     }
-    
+
 }
-
-
