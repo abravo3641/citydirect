@@ -1271,6 +1271,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="8wa-gp-vmt"/>
                     <connections>
+                        <outlet property="nacView" destination="AVj-Sb-HPm" id="I2w-qk-z3d"/>
                         <segue destination="cij-Fm-q1e" kind="show" identifier="homePageSegue" id="Mzk-7s-Yda"/>
                         <segue destination="9V2-hE-Fhg" kind="show" identifier="groveSegue" id="plW-Hl-Tpa"/>
                         <segue destination="0uE-DG-nky" kind="show" identifier="marshakSegue" id="Muq-aE-UPb"/>

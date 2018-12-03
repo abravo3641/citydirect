@@ -10,9 +10,15 @@ import UIKit
 
 class MainPageViewController: UIViewController {
     
+    @IBOutlet weak var nacView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: "nac")
+        backgroundImage.contentMode = UIViewContentMode.scaleAspectFill
+        nacView.insertSubview(backgroundImage, at: 0)
         // Do any additional setup after loading the view.
     }
     
