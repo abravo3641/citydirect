@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import MBProgressHUD
 
 class LoginViewController: UIViewController {
     @IBOutlet weak var usernameField: UITextField!
@@ -15,10 +16,13 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButtonFrame: UIView!
     @IBOutlet weak var signinFrame: UIView!
     @IBOutlet weak var signupFrame: UIView!
+    @IBOutlet weak var nacImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        //setBlur()
+        
         // set login button properties
         loginButtonFrame.layer.cornerRadius = 8.0
         loginButtonFrame.clipsToBounds = true
@@ -26,6 +30,10 @@ class LoginViewController: UIViewController {
         signinFrame.clipsToBounds = true
         signupFrame.layer.cornerRadius = 8.0
         signupFrame.clipsToBounds = true
+        
+        setGradient()
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,20 +42,29 @@ class LoginViewController: UIViewController {
     }
     
     
+    
     @IBAction func onLogIn(_ sender: Any) {
+        // add loading indicator
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        hud.mode = .indeterminate
+        
         let username = usernameField.text ?? "" // provides default value of empty string if no username / password
         let password = passwordField.text ?? ""
         PFUser.logInWithUsername(inBackground: username, password: password) { (user: PFUser?, error: Error?) in
             if let error = error {
                 print("User log in failed: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    hud.mode = .customView
+                    hud.label.text = "Incorrect username/password"
+                    hud.customView = UIImageView(image: #imageLiteral(resourceName: "x_icon_small"))
+                    hud.hide(animated: true, afterDelay: 1)
+                }
             } else {
                 print("User logged in successfully")
-                if username == "admin" {
-                    self.performSegue(withIdentifier: "AdminSegue", sender: nil)
+                DispatchQueue.main.async {
+                    hud.hide(animated:true)
                 }
-                else {
-                    self.performSegue(withIdentifier: "mainSegue", sender: nil)
-                }
+                self.performSegue(withIdentifier: "mainSegue", sender: nil)
             }
         }
     }
@@ -56,4 +73,70 @@ class LoginViewController: UIViewController {
         self.performSegue(withIdentifier: "SignUpSegue", sender: nil)
     }
 
+    func setGradient() {
+        var gradientLayer:CAGradientLayer!
+        gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.view.bounds
+        let topColor = hexStringToUIColor(hex: "C400FF")
+        let bottomColor = hexStringToUIColor(hex: "5500FF")
+        gradientLayer.colors = [topColor.cgColor, bottomColor.cgColor]
+        gradientLayer.startPoint = CGPoint(x:0,y:0)
+        gradientLayer.endPoint = CGPoint(x:1,y:1)
+        
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
+        
+    }
+    
+    
+    func hexStringToUIColor (hex:String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+        
+        if ((cString.count) != 6) {
+            return UIColor.gray
+        }
+        
+        var rgbValue:UInt32 = 0
+        Scanner(string: cString).scanHexInt32(&rgbValue)
+        
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    
+    func setBlur() {
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.view.insertSubview(blurEffectView, at:0)
+    }
+    
 }
+
+
+
+/*
+extension UIImageView
+{
+    func blurImage()
+    {
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.init(rawValue: 1)!)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.bounds
+        
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
+        self.addSubview(blurEffectView)
+    }
+ */
+
+
+
+
