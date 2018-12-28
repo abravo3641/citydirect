@@ -6,6 +6,7 @@ Link to presentation: https://drive.google.com/open?id=1b5RZkc6LCUt8PjfaIMbY-0CG
 ## User Stories
 
 1. Regular user login
+
 ![](video1.gif)
 
 2. Choosing your campus building
