@@ -1,6 +1,7 @@
 # Final Project - *City Direct*
 
 **City Direct** is an app that helps students plan their route more efficiently.
+
 Link to presentation: https://drive.google.com/open?id=1b5RZkc6LCUt8PjfaIMbY-0CGZUkxr1DRC58BOHjVPdE
 
 ## User Stories
