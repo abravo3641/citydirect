@@ -7,7 +7,7 @@ Link to presentation: https://drive.google.com/open?id=1b5RZkc6LCUt8PjfaIMbY-0CG
 
 1. Regular user login
 
-![](video1.gif)
+![](/gifs/video1.gif)
 
 2. Choosing your campus building
 <img src='i.imgur.com/GLeuRuU.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
