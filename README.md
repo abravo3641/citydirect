@@ -6,7 +6,7 @@ Link to presentation: https://drive.google.com/open?id=1b5RZkc6LCUt8PjfaIMbY-0CG
 ## User Stories
 
 1. Regular user login
-<a href= "i.imgur.com/hTnhdK9.gif" > a  </a>
+![](video1.gif)
 
 2. Choosing your campus building
 <img src='i.imgur.com/GLeuRuU.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
